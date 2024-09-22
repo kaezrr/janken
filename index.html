@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getComputerChoice() {
+            const rand = Math.random();
+            if(rand <= 0.33)
+                return "rock";
+            else if(rand <= 0.66)
+                return "paper";
+            else
+                return "scissors";
+        }
+
+        function getHumanChoice() {
+            let response = prompt("Choose rock, paper or scissors!");
+            while(["rock", "paper", "scissors"].indexOf(response.toLowerCase()) === -1)
+                response = prompt("That's not a right choice! choose again.");
+            return response.toLowerCase();
+        }
+
+        let human_score = 0;
+        let computer_score = 0;
+
+        function playRound(human_choice, computer_choice) {
+            const arr1 = ["rock", "paper", "scissors"];
+            const arr2 = ["scissors", "rock", "paper"];
+          
+            if(arr1.indexOf(human_choice) === arr2.indexOf(computer_choice)) {
+                console.log("You win! " + human_choice + " beats " + computer_choice);
+                human_score++;
+            } else if(arr2.indexOf(human_choice) === arr1.indexOf(computer_choice)) {
+                console.log("You lose! " + computer_choice + " beats " + human_choice);
+                computer_score++;
+            } else {
+                console.log("Draw!");
+            }
+        }
+
+        for(let i = 1; i <= 5; ++i) {
+            console.log("Round " + i);
+            const human_choice = getHumanChoice();
+            const computer_choice = getComputerChoice();
+            playRound(human_choice, computer_choice);
+        }
+
+        console.log("You scored: " + human_score + " Computer scored: " + computer_score);
+        if(human_score > computer_score) {
+            console.log("You won!");
+        } else if(human_score < computer_score) {
+            console.log("You lost!");
+        } else {
+            console.log("Draw!");
+        }
+
+    </script>
+</body>
+</html>
